@@ -36,7 +36,10 @@ namespace OfficeTelerik.Pages
             }
             SetNulls();
         }
+        public void forgit()
+        {
 
+        }
 
         protected async Task LogOutUser()
         {

@@ -36,6 +36,7 @@ namespace OfficeTelerik.Pages
             }
             SetNulls();
         }
+
        
 
         protected async Task LogOutUser()
@@ -96,6 +97,11 @@ namespace OfficeTelerik.Pages
             password = null;
             Email = null;
             ConfirmPassword = null;
+        }
+
+        public void jajaja()
+        {
+
         }
     }
 }

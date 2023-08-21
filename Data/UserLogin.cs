@@ -46,6 +46,7 @@ namespace OfficeTelerik.Data
             {
             }
         }
+        
 
         public async Task<UserLogin> AddNewUserAsync()
         {
@@ -92,6 +93,6 @@ namespace OfficeTelerik.Data
             {
             }
         }
-        public int MyProperty { get; set; }
+        
     }
 }

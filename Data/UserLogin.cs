@@ -12,9 +12,6 @@ namespace OfficeTelerik.Data
         public string ErrMsg { get; set; }
         public string Email { get; set; }
 
-
-
-
         public UserLogin()
         {
 
@@ -27,19 +24,15 @@ namespace OfficeTelerik.Data
             Email = email;
         }
 
-
         public async Task<UserLogin> GetUsersInfo()
         {
-
             try
             {
                 List<SPParam> par = new List<SPParam>
                 {
                     new SPParam("username",this.UserName),
                     new SPParam("pass",this.Password),
-
                 };
-
                 UserLogin item = await MySQLDataAccess<UserLogin>.ExecuteSPItemAsync("GetUser", par);
                 return item;
             }
@@ -55,7 +48,6 @@ namespace OfficeTelerik.Data
 
         public async Task<UserLogin> AddNewUserAsync()
         {
-
             try
             {
                 List<SPParam> par = new List<SPParam>
@@ -63,7 +55,6 @@ namespace OfficeTelerik.Data
                     new SPParam("username",this.UserName),
                     new SPParam("password",this.Password),
                     new SPParam("email",this.Email),
-
                 };
 
                 UserLogin item = await MySQLDataAccess<UserLogin>.ExecuteSPItemAsync("AddNewUser", par);
@@ -81,7 +72,6 @@ namespace OfficeTelerik.Data
 
         public async Task<UserLogin> GetUserByEmail()
         {
-
             try
             {
                 List<SPParam> par = new List<SPParam>
@@ -89,7 +79,6 @@ namespace OfficeTelerik.Data
                     new SPParam("email",this.Email),
 
                 };
-
                 UserLogin item = await MySQLDataAccess<UserLogin>.ExecuteSPItemAsync("GetUserByEmail", par);
                 return item;
             }
@@ -103,6 +92,6 @@ namespace OfficeTelerik.Data
             }
         }
 
-       
+
     }
 }

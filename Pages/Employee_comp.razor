@@ -1,4 +1,5 @@
 ﻿@page "/employees"
+@using System.Security.Claims;
 @inherits Employee
 
     <TelerikGrid TItem="Employees"
@@ -10,7 +11,6 @@
              EditMode="GridEditMode.Popup"
              OnCreate="CreateHandler"
              OnUpdate="UpdateHandler">
-
     <GridToolBarTemplate>
         <GridCommandButton Command="Add">Add</GridCommandButton>
     </GridToolBarTemplate>
@@ -30,7 +30,6 @@
                     //{
                     //    <option value="@((int)item)">@item</option>
                     //}
-                    
                     //</InputSelect>
                     <TelerikDropDownList Data="PositionsData" @bind-Value="op.Position" DefaultText="Select Position" />
                     if (op.Position == Positions.Supervizor)
@@ -43,7 +42,6 @@
                     }
                 }
             </EditorTemplate>
-
         </GridColumn>
         <GridColumn Field="@nameof(Employees.ForSupervizors)" Editable=false/>
         <GridColumn Field="@nameof(Employees.Phone)" />
@@ -58,7 +56,42 @@
 </TelerikGrid>
 
 
+@if (ShowHaventAccesModal)
+{
+    <AuthorizeView>
+        <Authorized>
+            <div class="modal" tabindex="-1" role="dialog" style="display: @(ShowHaventAccesModal ? "block" : "none")">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                You Don't have access to that action:  (only 'admin')  your role is: @foreach (var role in context.User.Claims.Where(c => c.Type == ClaimTypes.Role))
+                                {
+                                    <span>@role.Value</span>
+                                }
+                            </h5>
+                        </div>
+                        <div class="modal-body" style="display:flex; width:100%; gap:10px; flex-wrap:wrap">
+                            <div>
 
+                                <div>
+
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="()=>ShowHaventAccesModal = false">OK</button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+
+    
+}
 
 
         

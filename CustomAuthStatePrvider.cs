@@ -14,8 +14,6 @@ namespace OfficeTelerik
         }
 
         private ClaimsPrincipal Claims { get; set; }
-
-
         private ClaimsPrincipal GetUser(string userName,string position)
         {
             var identity = new ClaimsIdentity(new[]

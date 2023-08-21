@@ -1,0 +1,70 @@
+﻿@page "/department"
+@using Office.Data;
+@inherits Department
+
+
+<TelerikGrid TItem="Departments"
+             Pageable="true"
+             ConfirmDelete="true"
+             OnRead="ReadItems"
+             OnCreate="CreateHandler"
+             OnDelete="DeleteHandler"
+             OnEdit="EditHandler"
+             OnUpdate="UpdateHandler"
+             PageSize="6"
+             EditMode="GridEditMode.Popup">
+    <GridToolBarTemplate>
+        <GridCommandButton Command="Add" OnClick="OnCreate">Add</GridCommandButton>
+    </GridToolBarTemplate>
+    <GridColumns>
+        <GridColumn Field="@nameof(Departments.ID)" Editable=false />
+        <GridColumn Field="@nameof(Departments.Name)" />
+        <GridColumn Field="@nameof(Departments.Location)" />
+        <GridColumn Field="@nameof(Departments.Phone)" />
+        <GridColumn Field="@nameof(Departments.SuperVizorID)" Title="Avalaible Supervizors" Width="0px">
+            <EditorTemplate Context="superContext">
+                @{
+                    Departments op = superContext as Departments;
+                    if (op.ID != null)
+                    {
+                        <TelerikDropDownList Data="OnlySupervizors"
+                                             TextField="FirstName"
+                                             ValueField="ID"
+                        @bind-Value="op.SuperVizorID"
+                                             DefaultText="@(CurrentSupervizor.FirstName ?? "Select Supervizor")">
+                        </TelerikDropDownList>
+                    }
+                    else
+                    {
+                        <TelerikDropDownList Data="OnlySupervizors"
+                                             TextField="FirstName"
+                                             ValueField="ID"
+                        @bind-Value="op.SuperVizorID"
+                                             DefaultText="Select Supervizor">
+                        </TelerikDropDownList>
+                    }
+                }
+            </EditorTemplate>
+        </GridColumn>
+        <GridColumn Title="Avalaible Employees" Width="0px">
+            <EditorTemplate Context="empContext">
+                @{
+                    Departments op = empContext as Departments;
+                    <TelerikMultiSelect Data="OnlyEmployees"
+                                        @bind-Value="op.EmployeeIDs"
+                                        TextField="FirstName"
+                                        ValueField="ID"
+                                        Placeholder="Select Employees">
+                    </TelerikMultiSelect>
+                }
+            </EditorTemplate>
+        </GridColumn>
+        <GridCommandColumn Width="130px">
+            <GridCommandButton Command="Save" ShowInEdit="true">Update</GridCommandButton>
+            <GridCommandButton Command="Edit"> Edit</GridCommandButton>
+            <GridCommandButton Command="Delete">Delete</GridCommandButton>
+            <GridCommandButton Command="Cancel" ShowInEdit="true">Cancel</GridCommandButton>
+        </GridCommandColumn>
+    </GridColumns>
+</TelerikGrid>
+

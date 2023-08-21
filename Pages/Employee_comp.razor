@@ -1,0 +1,64 @@
+﻿@page "/employees"
+@inherits Employee
+
+    <TelerikGrid TItem="Employees"
+             Pageable="true"
+             ConfirmDelete="true"
+             OnDelete="DeleteHandler"
+             OnRead="ReadItems"
+             PageSize="6"
+             EditMode="GridEditMode.Popup"
+             OnCreate="CreateHandler"
+             OnUpdate="UpdateHandler">
+
+    <GridToolBarTemplate>
+        <GridCommandButton Command="Add">Add</GridCommandButton>
+    </GridToolBarTemplate>
+    <GridColumns>
+        <GridColumn Field="@nameof(Employees.ID)" Title="ID" Editable=false />
+        <GridColumn Field="@nameof(Employees.FirstName)" />
+        <GridColumn Field="@nameof(Employees.LastName)" />
+        <GridColumn Field="@nameof(Employees.Title)" />
+        <GridColumn Field="@nameof(Employees.Name)" Title="Department" Editable=false/>
+        <GridColumn Field="@nameof(Employees.Position)">
+            <EditorTemplate Context="kendoContext">
+                @{
+                    Employees op = kendoContext as Employees;
+                    //<InputSelect @bind-Value="op.Position" style="width:100%">
+                    //<option selected disabled>Select Positon</option>
+                    //@foreach (var item in Enum.GetValues(typeof(Positions)))
+                    //{
+                    //    <option value="@((int)item)">@item</option>
+                    //}
+                    
+                    //</InputSelect>
+                    <TelerikDropDownList Data="PositionsData" @bind-Value="op.Position" DefaultText="Select Position" />
+                    if (op.Position == Positions.Supervizor)
+                    {
+                        <label>For Supervizors</label>
+                        <TelerikTextBox @bind-Value="op.ForSupervizors"> </TelerikTextBox>
+                    }
+                    else
+                    {
+                    }
+                }
+            </EditorTemplate>
+
+        </GridColumn>
+        <GridColumn Field="@nameof(Employees.ForSupervizors)" Editable=false/>
+        <GridColumn Field="@nameof(Employees.Phone)" />
+        <GridColumn Field="@nameof(Employees.Email)" />
+        <GridCommandColumn Width="130px">
+            <GridCommandButton Command="Save" ShowInEdit="true">Update</GridCommandButton>
+            <GridCommandButton Command="Edit"> Edit</GridCommandButton>
+            <GridCommandButton Command="Delete">Delete</GridCommandButton>
+            <GridCommandButton Command="Cancel" ShowInEdit="true">Cancel</GridCommandButton>
+        </GridCommandColumn>
+    </GridColumns>
+</TelerikGrid>
+
+
+
+
+
+        

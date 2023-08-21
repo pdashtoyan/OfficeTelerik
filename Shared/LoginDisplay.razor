@@ -1,0 +1,17 @@
+﻿@inherits Loginz
+
+<AuthorizeView>
+    <Authorized>
+        <span>
+            @context.User.Identity?.Name!
+        </span>
+        <a href="#" @onclick="LogedOut">Log Out</a>
+    </Authorized>
+</AuthorizeView>
+
+
+
+@code{
+    [Parameter]
+    public Func<Task> LogedOut { get; set; }
+}

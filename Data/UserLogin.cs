@@ -92,6 +92,6 @@ namespace OfficeTelerik.Data
             {
             }
         }
-
+        public int MyProperty { get; set; }
     }
 }

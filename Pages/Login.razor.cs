@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using OfficeTelerik.Data;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using Telerik.SvgIcons;
 
 namespace OfficeTelerik.Pages
